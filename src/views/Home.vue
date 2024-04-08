@@ -1,12 +1,12 @@
 <template>
   <div class="navAndNewYork">
     <v-container>
-      <v-card color="transparent" class="elevation-0">
+      <v-card color="transparent" class="elevation-0 headerCard">
         <v-row align="center">
-          <v-col cols="12" lg="2" align="center">
+          <v-col lg="2" md="2" sm="2" align="center">
             <v-img src="../assets/logo.png" contain height="4.5em"></v-img>
           </v-col>
-          <v-col cols="12" lg="8" align="center">
+          <v-col lg="8" md="8" sm="8" align="center">
             <v-card class="cardTransparent elevation-0 d-flex align-center">
               <v-btn class="cardBtn elevation-0" color="#497AFF" size="x-large" @click="scrollToAbout">О нас</v-btn>
               <v-btn class="cardBtn elevation-0" size="x-large" @click="scrollToStatistics">Статистика</v-btn>
@@ -14,7 +14,7 @@
               <v-btn class="cardBtn elevation-0" size="x-large" @click="scrollToContacts">Контакты</v-btn>
             </v-card>
           </v-col>
-          <v-col cols="12" lg="2" align="right">
+          <v-col lg="2" md="2" sm="2" align="right">
             <v-card class="number elevation-0">
               <b>Номер для связи - </b>
               <p>+7(978) 123 45 67</p>
@@ -174,7 +174,7 @@ const scrollToContacts = () => {
 .newYork {
   background: transparent;
   margin-left: 3em;
-  margin-top: 5em;
+  margin-top: 17.5em;
 }
 
 .newYorkTitle {
@@ -205,6 +205,7 @@ const scrollToContacts = () => {
   color: white;
   margin-top: 5em;
   width: 20em;
+  margin-bottom: 1em;
 }
 
 .insideNewYork {
@@ -214,7 +215,7 @@ const scrollToContacts = () => {
 .insideNewYork1 {
   border-radius: 27px;
   margin-bottom: 2.5em;
-  margin-left: 70%;
+  margin-left: 15em;
   margin-top: 1em;
   padding: 5% 10% 5% 5%;
 }
@@ -274,5 +275,10 @@ const scrollToContacts = () => {
 /* Other */
 .emergencyIcon {
   height: 1em;
+}
+
+.headerCard {
+  position:fixed;
+  z-index: 1
 }
 </style>
