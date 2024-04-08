@@ -19,7 +19,7 @@
                     <span>Кечкеметская улица, 147, Симферополь,
                     Республика Крым, 295022</span>
                 </v-card-text>
-                <v-btn class="connect" append-icon="mdi-arrow-top-right">
+                <v-btn class="connect" append-icon="north_east">
                     Связаться 
                 </v-btn>
             </v-card>

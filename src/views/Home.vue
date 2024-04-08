@@ -3,10 +3,10 @@
     <v-container>
       <v-card color="transparent" class="elevation-0 headerCard">
         <v-row align="center">
-          <v-col lg="2" md="2" sm="2" align="center">
+          <v-col cols="12" lg="2" md="2" align="center">
             <v-img src="../assets/logo.png" contain height="4.5em"></v-img>
           </v-col>
-          <v-col lg="8" md="8" sm="8" align="center">
+          <v-col cols="12" lg="8" md="6" align="center">
             <v-card class="cardTransparent elevation-0 d-flex align-center">
               <v-btn class="cardBtn elevation-0" color="#497AFF" size="x-large" @click="scrollToAbout">О нас</v-btn>
               <v-btn class="cardBtn elevation-0" size="x-large" @click="scrollToStatistics">Статистика</v-btn>
@@ -14,7 +14,7 @@
               <v-btn class="cardBtn elevation-0" size="x-large" @click="scrollToContacts">Контакты</v-btn>
             </v-card>
           </v-col>
-          <v-col lg="2" md="2" sm="2" align="right">
+          <v-col cols="12" lg="2" md="4" align="right">
             <v-card class="number elevation-0">
               <b>Номер для связи - </b>
               <p>+7(978) 123 45 67</p>
@@ -25,14 +25,18 @@
           <v-col cols="12" lg="10">
           </v-col>
           <v-col cols="12" lg="2" align="right" class="numberCol">
-            <v-card class="social elevation-0">
-              <v-btn class="socialBtn elevation-0">
+            <v-card 
+            class="social elevation-0">
+              <v-btn class="socialBtn elevation-0"
+              :style="{ background: `rgba(100, 100, 100, ${socialMediaBackground})` }">
                 <img src="../assets/whatsapp.svg"/>
               </v-btn>
-              <v-btn class="socialBtn elevation-0">
+              <v-btn class="socialBtn elevation-0"
+              :style="{ background: `rgba(100, 100, 100, ${socialMediaBackground})` }">
                 <img src="../assets/telegram.svg"/>
               </v-btn>
-              <v-btn class="socialBtnVk elevation-0">
+              <v-btn class="socialBtnVk elevation-0"
+              :style="{ background: `rgba(100, 100, 100, ${socialMediaBackground})` }">
                 <img src="../assets/vk.svg"/>
               </v-btn>
             </v-card>
@@ -81,12 +85,26 @@ import about from "../components/About.vue"
 import statistics from "../components/Statistics.vue"
 import partners from "../components/Partners.vue"
 import contacts from "../components/Contacts.vue"
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 
 const aboutSection = ref(null);
 const statisticsSection = ref(null);
 const partnersSection = ref(null)
 const contactsSection = ref(null)
+
+const socialMediaBackground = ref(0.2);
+
+const handleScroll = () => {
+  socialMediaBackground.value = window.scrollY / 600;
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 
 const scrollToAbout = () => {
   aboutSection.value.$el.scrollIntoView({ behavior: 'smooth' });
@@ -103,6 +121,10 @@ const scrollToPartners = () => {
 const scrollToContacts = () => {
   contactsSection.value.$el.scrollIntoView({ behavior: 'smooth' });
 };
+
+defineExpose({
+  socialMediaBackground
+});
 </script>
 
 <style scoped>
@@ -119,6 +141,7 @@ const scrollToContacts = () => {
   background: url("../assets/newYork.png");
   background-position: bottom 47.5% left 10%;
   background-size: cover;
+  padding-top: 100px; /* Adjust this value based on the height of your header */
 }
 
 .cardTransparent {
@@ -174,7 +197,7 @@ const scrollToContacts = () => {
 .newYork {
   background: transparent;
   margin-left: 3em;
-  margin-top: 17.5em;
+  margin-top: 5em;
 }
 
 .newYorkTitle {
@@ -205,7 +228,6 @@ const scrollToContacts = () => {
   color: white;
   margin-top: 5em;
   width: 20em;
-  margin-bottom: 1em;
 }
 
 .insideNewYork {
@@ -215,7 +237,7 @@ const scrollToContacts = () => {
 .insideNewYork1 {
   border-radius: 27px;
   margin-bottom: 2.5em;
-  margin-left: 15em;
+  margin-left: 70%;
   margin-top: 1em;
   padding: 5% 10% 5% 5%;
 }
@@ -278,7 +300,17 @@ const scrollToContacts = () => {
 }
 
 .headerCard {
-  position:fixed;
-  z-index: 1
+  position: fixed;
+  top: 1.5em;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  padding-left: 3em;
+  padding-right: 4.5em;
+  transition: background-color 0.3s ease;
+}
+
+.headerCard.scrolled {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 </style>
